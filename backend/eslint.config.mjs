@@ -1,11 +1,11 @@
-import js from "@eslint/js";
-import globals from "globals";
-import tseslint from "typescript-eslint";
-import { defineConfig } from "eslint/config";
+import js from "@eslint/js"
+import globals from "globals"
+import tseslint from "typescript-eslint"
+import { defineConfig } from "eslint/config"
 
 export default defineConfig([
   {
-    ignores: ["src/generated", "node_modules", "dist"]
+    ignores: ["src/generated", "node_modules", "dist"],
   },
   {
     files: ["src/**/*.{js,mjs,cjs,ts,mts,cts}"],
@@ -16,7 +16,7 @@ export default defineConfig([
   tseslint.configs.recommended,
   {
     rules: {
-      "prefer-const": "warn"
-    }
-  }
-]);
+      "prefer-const": "warn",
+    },
+  },
+])

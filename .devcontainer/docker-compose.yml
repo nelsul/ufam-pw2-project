@@ -1,0 +1,25 @@
+name: ufam-pw2-project-devcontainer
+
+services:
+  main:
+    container_name: ufam-pw2-project-main
+    image: node:22.21.1-alpine3.22
+    volumes:
+      - ..:/workspace:cached
+    command: sleep infinity
+    depends_on:
+      - db
+
+  db:
+    container_name: ufam-pw2-project-db
+    image: mysql:8.4.6-oraclelinux9
+    ports:
+      - "3306:3306"
+    volumes:
+      - ../db/db-data:/var/lib/mysql
+      - ../db/db-conf:/etc/mysql/conf.d
+    environment:
+      MYSQL_ROOT_PASSWORD: senha_robusta
+      MYSQL_USER: usuario_db
+      MYSQL_PASSWORD: senha_robusta
+      MYSQL_DATABASE: loja

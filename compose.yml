@@ -1,11 +1,11 @@
 services:
-  backend-dev: 
+  backend-dev:
     build:
       context: ./backend
       target: development
     restart: always
     ports:
-      - ${PORT_BACKEND}:6677
+      - ${PORT_BACKEND}:7788
     volumes:
       - ./backend:/app
     env_file: ./backend/.env
@@ -18,10 +18,21 @@ services:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}  
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
     volumes:
-      - db-data:/var/lib/mysql
-      - db-conf:/etc/mysql/conf.d
+      - ./db/db-data:/var/lib/mysql
+      - ./db/db-conf:/etc/mysql/conf.d
+  frontend-dev:
+    build:
+      context: ./frontend
+      target: development
+    restart: always
+    ports:
+      - ${PORT_FRONTEND}:3000
+    volumes:
+      - ./frontend:/app
+    environment:
+      - BACKEND_URL=http://backend-dev:7788
   phpmyadmin:
     image: phpmyadmin:5.2.2-apache
     restart: always
@@ -29,8 +40,7 @@ services:
       - ${PORT_PHPMYADMIN}:80
     environment:
       - PMA_HOST=db
-    
+
 volumes:
   db-data:
   db-conf:
-

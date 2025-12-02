@@ -1,0 +1,16 @@
+{
+    "name": "PW2 Project Dev Container",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "main",
+    "workspaceFolder": "/workspace",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "dbaeumer.vscode-eslint",
+                "esbenp.prettier-vscode",
+                "prisma.prisma"
+            ]
+        }
+    },
+    "postCreateCommand": "apk update && apk add git"
+}
